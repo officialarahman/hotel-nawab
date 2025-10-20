@@ -1,12 +1,17 @@
 :root {
-    --accent: #b33939;
-    --muted: #666666;
+    --accent: #0e324a;
+    --muted: rgb(42, 69, 87)
     --bg: #fafafa;
     --card: #fff;
     --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
     --radius: 14px;
     --max-width: 1100px;
     --gap: 16px;
+    --veg-color: #28a745;
+    /* green */
+    --nonveg-color: #e53935;
+    /* red */
+    --pill-active-bg: var(--accent);
 }
 
 * {
@@ -18,7 +23,7 @@ body {
     height: 100%;
     margin: 0;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(180deg, #fff, #f6f6f6)
+    background: radial-gradient(#fff, #0e324a)
 }
 
 a {
@@ -129,7 +134,26 @@ main {
 }
 
 .subtype {
-    margin: 10px 0
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fff, #fff);
+    border: 1px solid #faf0f0;
+}
+
+.subtype-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: default;
+    user-select: none;
+}
+
+.subtype-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .subtype h3 {
@@ -141,6 +165,24 @@ main {
     gap: 8px
 }
 
+.subtype .sub-meta {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+/* small arrow on right for subtype toggle */
+.sub-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: transform .18s;
+    background: #fff;
+}
+
 .dish-list {
     margin-top: 8px
 }
@@ -148,7 +190,7 @@ main {
 .dish {
     border-radius: 10px;
     overflow: hidden;
-    margin: 10px 0;
+    margin: 8px 0;
     border: 1px solid #f3f3f3;
     background: linear-gradient(180deg, #fff, #fff)
 }
@@ -158,7 +200,7 @@ main {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     width: 100%;
     background: transparent;
@@ -172,8 +214,20 @@ main {
     gap: 12px
 }
 
+.dish-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.06)
+}
+
 .dish-button .dish-name {
-    font-weight: 700
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px
 }
 
 .dish-button .dish-meta {
@@ -214,7 +268,7 @@ main {
     width: 100%;
     display: block;
     object-fit: cover;
-    height: 300px
+    height: 220px
 }
 
 .carousel .dots {
@@ -246,33 +300,6 @@ main {
     font-weight: 700
 }
 
-.side-card {
-    background: var(--card);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px
-}
-
-.qr {
-    display: grid;
-    place-items: center;
-    padding: 12px;
-    border-radius: 10px;
-    background: #fff;
-    min-height: 180px;
-    border: 1px dashed #eee
-}
-
-.qr img {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    background: #eee
-}
-
 .contact-list {
     font-size: 14px;
     color: var(--muted)
@@ -284,10 +311,11 @@ main {
 
 footer.site-footer {
     margin-top: 18px;
-    background: transparent;
+    background: #0e324ade;
     text-align: center;
-    color: var(--muted);
+    color: white;
     font-size: 13px;
+    border-radius: 20px;
     padding: 10px
 }
 
@@ -304,19 +332,84 @@ footer.site-footer {
     border: 1px solid #eee;
     cursor: pointer;
     font-weight: 700;
-    user-select: none
+    user-select: none;
+    background: #fff
 }
 
 .pill.active {
-    background: var(--accent);
+    background: var(--pill-active-bg);
     color: #fff;
-    border-color: var(--accent)
+    border-color: var(--pill-active-bg)
 }
 
 .single-price {
     font-weight: 800;
     font-size: 18px;
     margin-top: 10px
+}
+
+/* Search bar styles (modern rounded) */
+.menu-search-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 10px
+}
+
+.menu-search {
+    width: 100%;
+    max-width: 820px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border-radius: 999px;
+    padding: 10px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f0f0f0;
+}
+
+.menu-search input {
+    border: 0;
+    outline: 0;
+    font-size: 15px;
+    width: 100%;
+}
+
+.menu-search .icon {
+    width: 18px;
+    height: 18px;
+    opacity: .7
+}
+
+/* Filter buttons */
+.filter-row {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.filter-btn {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent)
+}
+
+.no-results {
+    padding: 20px;
+    text-align: center;
+    color: var(--muted);
+    font-weight: 600
 }
 
 /* responsive */
@@ -335,5 +428,10 @@ footer.site-footer {
     .arrow {
         width: 28px;
         height: 28px
+    }
+
+    .sub-toggle {
+        width: 26px;
+        height: 26px
     }
 }
